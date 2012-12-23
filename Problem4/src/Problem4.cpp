@@ -8,12 +8,13 @@
 
 bool isPalindrome(int num);
 int countDigits(int num);
-int* convertToArray(int numDigits, int num);
+int* convertToArray(int digits, int num);
+int* convertToBackwardsArray(int digits, int num);
 
 int main(int argc, char* argv[]) {
 	int highest = 0;
 	for (int i=100; i<1000; i++) {
-		for (int j=100; j<110; j++) {	//TODO: revert to 1000
+		for (int j=100; j<1000; j++) {
 			int product = i*j;
 			if (isPalindrome(product) && product>highest) {
 				highest = product;
@@ -29,12 +30,17 @@ bool isPalindrome(int num) {
 		return num >= 0;
 	}
 	int digits = countDigits(num);
-	int* numAsArray = convertToArray(digits, num);
-	std::cout << num << "\t";
-	for (int i=0; i<digits; i++) {
-		std::cout << numAsArray[i];
+	int* numArray = convertToArray(digits, num);
+	int* numBackwards = convertToBackwardsArray(digits, num);
+	//discard any numbers with a leading or trailing zero
+	if (numArray[0]==0 || numBackwards[0]==0) {
+		return false;
 	}
-	std::cout << std::endl;
+	for (int i=0; i<digits; i++) {
+		if (numArray[i] != numBackwards[i]) {
+			return false;
+		}
+	}
 	return true;
 }
 
@@ -50,6 +56,15 @@ int countDigits(int num) {
 int* convertToArray(int digits, int num) {
 	int* array = new int[digits];
 	for (int i=digits-1; i>=0; i--) {
+		array[i] = num % 10;
+		num /= 10;
+	}
+	return array;
+}
+
+int* convertToBackwardsArray(int digits, int num) {
+	int* array = new int[digits];
+	for (int i=0; i<digits; i++) {
 		array[i] = num % 10;
 		num /= 10;
 	}
