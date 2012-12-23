@@ -8,11 +8,12 @@
 
 bool isPalindrome(int num);
 int countDigits(int num);
+int* convertToArray(int numDigits, int num);
 
 int main(int argc, char* argv[]) {
 	int highest = 0;
-	for (int i=1; i<105; i++) {
-		for (int j=10; j<105; j++) {
+	for (int i=100; i<1000; i++) {
+		for (int j=100; j<110; j++) {	//TODO: revert to 1000
 			int product = i*j;
 			if (isPalindrome(product) && product>highest) {
 				highest = product;
@@ -28,7 +29,8 @@ bool isPalindrome(int num) {
 		return num >= 0;
 	}
 	int digits = countDigits(num);
-	std::cout << num << "\t" << digits << std::endl;
+	int* numAsArray = convertToArray(digits, num);
+	std::cout << numAsArray[0] << std::endl;
 	return true;
 }
 
@@ -38,6 +40,14 @@ int countDigits(int num) {
 		num /= 10;
 		digits++;
 	}
-
 	return digits;
+}
+
+int* convertToArray(int digits, int num) {
+	int* array = new int[digits];
+	for (int i=0; i<digits; i++) {
+		array[i] = num % 10;
+		num /= 10;
+	}
+	return array;
 }
