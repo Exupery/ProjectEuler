@@ -30,7 +30,11 @@ bool isPalindrome(int num) {
 	}
 	int digits = countDigits(num);
 	int* numAsArray = convertToArray(digits, num);
-	std::cout << numAsArray[0] << std::endl;
+	std::cout << num << "\t";
+	for (int i=0; i<digits; i++) {
+		std::cout << numAsArray[i];
+	}
+	std::cout << std::endl;
 	return true;
 }
 
@@ -45,7 +49,7 @@ int countDigits(int num) {
 
 int* convertToArray(int digits, int num) {
 	int* array = new int[digits];
-	for (int i=0; i<digits; i++) {
+	for (int i=digits-1; i>=0; i--) {
 		array[i] = num % 10;
 		num /= 10;
 	}
