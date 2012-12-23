@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
 }
 
 double findLargestPrime(double num) {
-	for (double d=num-1; d>0; d--) {
-		//if (num%d==0 && isPrime(d)) {
+	double start = floor(sqrt(num));
+	for (double d=start; d>0; d--) {
 		if (fmod(num, d)==0 && isPrime(d)) {
 			return d;
 		}
@@ -29,7 +29,6 @@ double findLargestPrime(double num) {
 
 bool isPrime(double num) {
 	for (int i=2; (i*i)<=num; i++) {
-		//if (num % i == 0) {
 		if (fmod(num, i) == 0) {
 			return false;
 		}
