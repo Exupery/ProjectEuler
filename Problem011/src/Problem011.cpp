@@ -46,17 +46,52 @@ int main(int argc, char* argv[]) {
 
 int findHoriz(int grid[][20], int rows, int cols) {
 	int greatest = 0;
+	for (int r=0; r<rows; r++) {
+		for (int c=0; c+4<cols; c++) {
+			int prod = grid[r][c] * grid[r][c+1] * grid[r][c+2] * grid[r][c+3];
+			if (prod > greatest) {
+				greatest = prod;
+			}
+		}
+	}
 	std::cout << "The greatest product of four horizontal numbers is " << greatest << std::endl;
 	return greatest;
 }
 
 int findVert(int grid[][20], int rows, int cols) {
 	int greatest = 0;
+	for (int r=0; r+4<rows; r++) {
+		for (int c=0; c<cols; c++) {
+			int prod = grid[r][c] * grid[r+1][c] * grid[r+2][c] * grid[r+3][c];
+			if (prod > greatest) {
+				greatest = prod;
+			}
+		}
+	}
 	std::cout << "The greatest product of four vertical numbers is " << greatest << std::endl;
 	return greatest;
 }
+
 int findDiagonal(int grid[][20], int rows, int cols) {
 	int greatest = 0;
+	//top toward left, bottom toward right
+	for (int r=0; r+4<rows; r++) {
+		for (int c=0; c+4<cols; c++) {
+			int prod = grid[r][c] * grid[r+1][c+1] * grid[r+2][c+2] * grid[r+3][c+3];
+			if (prod > greatest) {
+				greatest = prod;
+			}
+		}
+	}
+	//top toward right, bottom toward left
+	for (int r=0; r+4<rows; r++) {
+		for (int c=3; c<cols; c++) {
+			int prod = grid[r][c] * grid[r+1][c-1] * grid[r+2][c-2] * grid[r+3][c-3];
+			if (prod > greatest) {
+				greatest = prod;
+			}
+		}
+	}
 	std::cout << "The greatest product of four diagonal numbers is " << greatest << std::endl;
 	return greatest;
 }
