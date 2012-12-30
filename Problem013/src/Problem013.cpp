@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
 	double sum = 0;
@@ -14,12 +15,13 @@ int main(int argc, char* argv[]) {
 		while (numFile.good()) {
 			std::string line;
 			getline(numFile, line);
-			//add line to sum
-			std::cout << line << std::endl;
+			double num = strtod(line.c_str(), NULL);
+			sum += num;
 		}
 		numFile.close();
 	}
 
+	std::cout.precision(11); //go an extra digit to confirm tenth digit is zero
     std::cout << "The sum is " << sum << std::endl;
     return 0;
 }
