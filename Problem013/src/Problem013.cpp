@@ -15,7 +15,9 @@ int main(int argc, char* argv[]) {
 		while (numFile.good()) {
 			std::string line;
 			getline(numFile, line);
-			double num = strtod(line.c_str(), NULL);
+			//since the problem only requires providing the first 10 digits we can speed this
+			//up greatly by working with only the most significant half of the 50 digits
+			double num = strtod(line.c_str(), NULL)/1.0e25;
 			sum += num;
 		}
 		numFile.close();
