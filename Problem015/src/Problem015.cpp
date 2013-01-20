@@ -9,7 +9,7 @@
 long countPaths(long x, long y);
 
 int main(int argc, char* argv[]) {
-	int paths = countPaths(4, 4);
+	long paths = countPaths(20, 20);
     std::cout << "Number of paths in a 20x20 grid is " << paths << std::endl;
     return 0;
 }
