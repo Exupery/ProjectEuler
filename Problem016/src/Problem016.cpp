@@ -6,13 +6,7 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <sstream>
-#include <stdio.h>
 #include <math.h>
-
-long getSum(double num);
-int countDigits(double num);
-int* getDigits(double num);
 
 int main(int argc, char* argv[]) {
 	double num = pow(2, 1000);
@@ -27,34 +21,5 @@ int main(int argc, char* argv[]) {
 	}
     std::cout << "The sum of the digits of " << num << " is " << sum << std::endl;
     return 0;
-}
-
-long getSum(double num) {
-	long sum = 0;
-	int* digits = getDigits(num);
-	for (unsigned int i=0; i<sizeof(digits)/sizeof(int); i++) {
-		std::cout << digits[i];
-		sum += digits[i];
-	}
-	return sum;
-}
-
-int countDigits(double num) {
-	int digits = 0;
-	while (num > 0) {
-		num /= 10;
-		digits++;
-	}
-	return digits;
-}
-
-int* getDigits(double num) {
-	int digits = countDigits(num);
-	int* array = new int[digits];
-	for (int i=digits-1; i>=0; i--) {
-		array[i] = fmod(num, 10.0);
-		num /= 10;
-	}
-	return array;
 }
 
