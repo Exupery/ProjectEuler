@@ -14,7 +14,7 @@ int* getLengths(std::string* strings, int size);
 int main(int argc, char* argv[]) {
 	std::string numbers[] = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 	std::string teens[] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
-	std::string tens[] = {"ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+	std::string tens[] = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
 	int* numberLengths = getLengths(numbers, sizeof(numbers) / sizeof(std::string));
 	int* teenLengths = getLengths(teens, sizeof(teens) / sizeof(std::string));
 	int* tenLengths = getLengths(tens, sizeof(tens) / sizeof(std::string));
