@@ -7,72 +7,54 @@
 
 #include <iostream>
 
-int countDigits(int num);
-int* convertToArray(int digits, int num);
-int* getLengths(std::string* strings, int size);
+int getLength(std::string* strings, int size);
 
 int main(int argc, char* argv[]) {
-	std::string numbers[] = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-	std::string teens[] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
-	std::string tens[] = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
-	int* numberLengths = getLengths(numbers, sizeof(numbers) / sizeof(std::string));
-	int* teenLengths = getLengths(teens, sizeof(teens) / sizeof(std::string));
-	int* tenLengths = getLengths(tens, sizeof(tens) / sizeof(std::string));
-	int hundredLength = std::string("hundred").length() + std::string("and").length();
-	int thousandLength = std::string("thousand").length();
+	std::string ones[] = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+	std::string teens[] = {"eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+	std::string tens[] = {"ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+	const int onesLength = getLength(ones, sizeof(ones) / sizeof(std::string));
+	const int teensLength = getLength(teens, sizeof(teens) / sizeof(std::string));
+	const int tensLength = getLength(tens, sizeof(tens) / sizeof(std::string));
+	const int hundredLength = std::string("hundred").length();
+	const int andLength = std::string("and").length();
 
 	int total = 0;
-	for (int i=1; i<100; i++) {
-		int iLength = 0;
-		int numDigits = countDigits(i);
-		int* num = convertToArray(numDigits, i);
-		if (i < 10) {
-			iLength += numberLengths[i-1];
-		} else if (i >= 10 && i < 20) {
-			iLength += teenLengths[i-10];
-		} else {
-			for (int j=0; j<numDigits; j++) {
-				if (j == numDigits-1) {
 
-				} else if (j == numDigits-2) {
-
-				} else {
-
-				}
-			}
-		}
-
-		std::cout << i << "\t" << iLength << std::endl;
-		total += iLength;
-	}
+	//one thousand
+	total += ((new std::string("one thousand"))->length()-1);
+	//hundreds in 1000 - handle "hundred" in "one hundred"
+	int numHundreds = 1000 - 100;
+	int combinedHundredLengths = numHundreds * hundredLength;
+	//hundreds in 1000 - handle "xyz" in "xyz hundred"
+	combinedHundredLengths += onesLength * 100;
+	total += combinedHundredLengths;
+	//tens in 1000
+	int numTens = (1000 / 100) * 9;
+	int combinedTensLengths = numTens * tensLength;
+	total += combinedTensLengths;
+	//ones in 1000
+	int numOnes = (1000 / 100) * 9; //9 instead of 10 because not used by teens
+	int combinedOnesLengths = numOnes * onesLength;
+	total += combinedOnesLengths;
+	//teens in 1000
+	int numTeens = 1000 / 100;
+	int combinedTeensLengths = numTeens * teensLength;
+	total += combinedTeensLengths;
+	//ands in 1000
+	int numAnds = numHundreds - (1000 / 100);
+	int combinedAndLengths = numAnds * andLength;
+	total += combinedAndLengths;
 
     std::cout << "Total letters used is " << total << std::endl;
     return 0;
 }
 
-int* getLengths(std::string* strings, int size) {
-	int* lengths = new int[size];
+int getLength(std::string* strings, int size) {
+	int length = 0;
 	for (int i=0; i<size; i++) {
-		lengths[i] = strings[i].length();
+		length += strings[i].length();
 	}
-	return lengths;
-}
-
-int countDigits(int num) {
-	int digits = 0;
-	while (num > 0) {
-		num /= 10;
-		digits++;
-	}
-	return digits;
-}
-
-int* convertToArray(int digits, int num) {
-	int* array = new int[digits];
-	for (int i=digits-1; i>=0; i--) {
-		array[i] = num % 10;
-		num /= 10;
-	}
-	return array;
+	return length;
 }
 
