@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 	int combinedTeensLengths = numTeens * teensLength;
 	total += combinedTeensLengths;
 	//ands in 1000
-	int numAnds = numHundreds - 10; //only x00 won't have "and"
+	int numAnds = numHundreds - 9; //only x00 won't have "and"
 	int combinedAndLengths = numAnds * andLength;
 	total += combinedAndLengths;
 
