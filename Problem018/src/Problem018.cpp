@@ -7,7 +7,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <string.h>
 #include <stdlib.h>
 
 std::vector<std::vector<int> > createTriangle();
@@ -28,11 +27,16 @@ std::vector<std::vector<int> > createTriangle() {
 		while (file.good()) {
 			std::string line;
 			getline(file, line);
-			std::cout << line << std::endl;	//DELME
-			triangle.push_back(tokenize(line));
+			if (line.length() > 0) {
+				triangle.push_back(tokenize(line));
+				std::cout << triangle.size() << std::endl;
+			}
 		}
+		std::cout << "near" << std::endl;
 		file.close();
+		std::cout << "far" << std::endl;
 	}
+	std::cout << triangle.size() << std::endl;
 	return triangle;
 }
 
@@ -41,12 +45,10 @@ std::vector<int> tokenize(std::string str) {
 	for (unsigned int i=0; i<=str.length(); i++) {
 		if (i==str.length() || !std::isdigit(str[i])) {
 			int num = ((str[i-2]-48) * 10) + (str[i-1]-48);
-			std::cout << num;	//DELME
 			v.push_back(num);
 		}
 	}
-	std::cout << std::endl;	//DELME
+//	std::cout << v.size() << std::endl;
 	return v;
-
 }
 
