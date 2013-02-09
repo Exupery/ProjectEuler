@@ -11,13 +11,20 @@
 
 std::vector<std::vector<int> > createTriangle();
 std::vector<int> tokenize(std::string str);
+int findMaxRoute(std::vector<std::vector<int> > triangle);
 
 int main(int argc, char* argv[]) {
 	std::vector<std::vector<int> > triangle = createTriangle();
-	std::cout << triangle.size() << std::endl;	//DELME
 	int max = 0;
+	if (triangle.size() > 0) {
+		max = findMaxRoute(triangle);
+	}
     std::cout << "The maximum sum of the triangle is " << max << std::endl;
     return 0;
+}
+
+int findMaxRoute(std::vector<std::vector<int> > triangle) {
+	return 0;
 }
 
 std::vector<std::vector<int> > createTriangle() {
@@ -29,14 +36,10 @@ std::vector<std::vector<int> > createTriangle() {
 			getline(file, line);
 			if (line.length() > 0) {
 				triangle.push_back(tokenize(line));
-				std::cout << triangle.size() << std::endl;
 			}
 		}
-		std::cout << "near" << std::endl;
 		file.close();
-		std::cout << "far" << std::endl;
 	}
-	std::cout << triangle.size() << std::endl;
 	return triangle;
 }
 
@@ -48,7 +51,6 @@ std::vector<int> tokenize(std::string str) {
 			v.push_back(num);
 		}
 	}
-//	std::cout << v.size() << std::endl;
 	return v;
 }
 
