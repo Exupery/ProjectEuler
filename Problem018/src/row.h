@@ -14,7 +14,7 @@
 class Row {
 private:
 	int rowNumber;
-	std::map<int, int, std::greater<int>() > numMap;
+	std::map<int, int, std::greater<int> > numMap;
 
 public:
 	Row(int rowNumber);
