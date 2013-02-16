@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <stdlib.h>
+#include "row.h"
 
 std::vector<std::vector<int> > createTriangle();
 std::vector<int> tokenize(std::string str);
@@ -24,7 +25,18 @@ int main(int argc, char* argv[]) {
 }
 
 int findMaxRoute(std::vector<std::vector<int> > triangle) {
-	return 0;
+	int highest = 0;
+	std::vector<std::vector<int> >::iterator rows;
+	for (rows=triangle.begin(); rows!=triangle.end(); rows++) {
+		std::vector<int> row = *rows;
+		std::vector<int>::iterator cols;
+		for (cols=row.begin(); cols!=row.end(); cols++) {
+			int num = *cols;
+			std::cout << num;
+		}
+		std::cout << std::endl;
+	}
+	return highest;
 }
 
 std::vector<std::vector<int> > createTriangle() {
