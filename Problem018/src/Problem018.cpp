@@ -28,7 +28,13 @@ int main(int argc, char* argv[]) {
 int findMaxRoute(std::vector<Row> triangle) {
 	int highest = 0;
 	std::cout << triangle.size() << std::endl;
-	//TODO
+	std::vector<Row>::iterator rows;
+	for (rows=triangle.begin(); rows!=triangle.end(); rows++) {
+		Row row = *rows;
+		std::cout << row.getRowNumber() << "\t";
+		std::vector<int> positions = row.getPositions();
+		std::cout << positions.at(0) << std::endl;
+	}
 
 	return highest;
 }

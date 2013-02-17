@@ -6,6 +6,7 @@
  */
 
 #include <map>
+#include <vector>
 #include <algorithm>
 
 #ifndef ROW_H_
@@ -14,6 +15,7 @@
 class Row {
 private:
 	int rowNumber;
+	std::vector<int> positions;
 	std::map<int, int, std::greater<int> > numMap;
 
 public:
@@ -21,6 +23,7 @@ public:
 	virtual ~Row();
 	int getRowNumber();
 	void addNumber(int num, int pos);
+	std::vector<int> getPositions();
 };
 
 #endif /* ROW_H_ */
