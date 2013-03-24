@@ -13,6 +13,7 @@
 std::vector<std::vector<int> > createTriangle();
 std::vector<int> tokenize(std::string str);
 std::vector<Row> convert(std::vector<std::vector<int> > triangle);
+bool isWithinOne(int x, int y);
 int findMaxRoute(std::vector<Row> triangle);
 
 int main(int argc, char* argv[]) {
@@ -27,16 +28,29 @@ int main(int argc, char* argv[]) {
 
 int findMaxRoute(std::vector<Row> triangle) {
 	int highest = 0;
-	std::cout << triangle.size() << std::endl;
 	std::vector<Row>::iterator rows;
+	int prevPos = 0;
 	for (rows=triangle.begin(); rows!=triangle.end(); rows++) {
 		Row row = *rows;
-		std::cout << row.getRowNumber() << "\t";
+//		std::cout << row.getRowNumber() << "\t";
 		std::vector<int> positions = row.getPositions();
-		std::cout << positions.at(0) << std::endl;
+//		std::cout << positions.at(0) << std::endl;
+		std::vector<int>::iterator it;
+		for (it=positions.begin(); it!=positions.end(); it++) {
+			int pos = *it;
+			if (isWithinOne(pos, prevPos)) {
+				highest += row.getValueAt(pos);
+				prevPos = pos;
+				break;
+			}
+		}
 	}
 
 	return highest;
+}
+
+bool isWithinOne(int x, int y) {
+	return (x==y || x==y-1 || x==y+1);
 }
 
 std::vector<Row> convert(std::vector<std::vector<int> > triangle) {

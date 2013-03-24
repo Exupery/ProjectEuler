@@ -17,11 +17,16 @@ Row::~Row() {
 
 void Row::addNumber(int num, int pos) {
 	numMap.insert(std::pair<int, int>(num, pos));
+	positionValues.insert(std::pair<int, int>(pos, num));
 	positions.clear();
 	std::map<int, int>::iterator it;
 	for (it=numMap.begin(); it!=numMap.end(); it++) {
-		positions.push_back(it->first);
+		positions.push_back(it->second);
 	}
+}
+
+int Row::getValueAt(int pos) {
+	return positionValues.at(pos);
 }
 
 int Row::getRowNumber() {

@@ -16,12 +16,14 @@ class Row {
 private:
 	int rowNumber;
 	std::vector<int> positions;
+	std::map<int, int> positionValues;
 	std::map<int, int, std::greater<int> > numMap;
 
 public:
 	Row(int rowNumber);
 	virtual ~Row();
 	int getRowNumber();
+	int getValueAt(int pos);
 	void addNumber(int num, int pos);
 	std::vector<int> getPositions();
 };
