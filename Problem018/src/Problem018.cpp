@@ -32,18 +32,21 @@ int findMaxRoute(std::vector<Row> triangle) {
 	int prevPos = 0;
 	for (rows=triangle.begin(); rows!=triangle.end(); rows++) {
 		Row row = *rows;
-//		std::cout << row.getRowNumber() << "\t";
 		std::vector<int> positions = row.getPositions();
-//		std::cout << positions.at(0) << std::endl;
+		int bestVal = 0;
+		int bestPos = 0;
 		std::vector<int>::iterator it;
 		for (it=positions.begin(); it!=positions.end(); it++) {
 			int pos = *it;
-			if (isWithinOne(pos, prevPos)) {
-				highest += row.getValueAt(pos);
-				prevPos = pos;
-				break;
+			int valAtPos = row.getValueAt(pos);
+			if (isWithinOne(pos, prevPos) && valAtPos > bestVal) {
+				bestPos = pos;
+				bestVal = valAtPos;
 			}
 		}
+		std::cout << "pos:\t" << bestPos << "\tval:\t" << bestVal << std::endl;
+		prevPos = bestPos;
+		highest += bestVal;
 	}
 
 	return highest;
