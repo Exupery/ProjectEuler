@@ -50,7 +50,7 @@ std::vector<Row> convert(std::vector<std::vector<int> > triangle) {
 		int pos = 0;
 		for (cols=row.begin(); cols!=row.end(); cols++) {
 			int num = *cols;
-			std::cout << num;		//DELME
+			std::cout << num << " ";		//DELME
 			r.addNumber(num, pos++);
 		}
 		std::cout << std::endl;		//DELME

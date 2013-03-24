@@ -17,10 +17,9 @@ Row::~Row() {
 
 void Row::addNumber(int num, int pos) {
 	numMap.insert(std::pair<int, int>(num, pos));
-	positions.empty();
+	positions.clear();
 	std::map<int, int>::iterator it;
 	for (it=numMap.begin(); it!=numMap.end(); it++) {
-//		positions.push_back(it.operator ->()->second);
 		positions.push_back(it->first);
 	}
 }
