@@ -15,6 +15,7 @@ std::vector<int> tokenize(std::string str);
 std::vector<Row> convert(std::vector<std::vector<int> > triangle);
 bool isWithinOne(int x, int y);
 int findMaxRoute(std::vector<Row> triangle);
+//int findBestPosInNext(int curPos, int curRow, std::vector<Row> triangle);
 
 int main(int argc, char* argv[]) {
 	std::vector<std::vector<int> > triangle = createTriangle();
@@ -52,8 +53,26 @@ int findMaxRoute(std::vector<Row> triangle) {
 	return highest;
 }
 
+//int findBestPosInNext(int curPos, int curRow, std::vector<Row> triangle) {
+//	int best = 0;
+//	int highestSum = -1;
+//	Row current = triangle.at(curRow);
+//	for (int i=curPos-1; i<=curPos+1; i++) {
+//		int sum = 0;
+//		if (i>=0 && i<current.getPositions().size()) {
+//			//see what possible sums from curRow+1(i) + curRow+2
+//
+//
+//		}
+//		if (sum > highestSum) {
+//			best = i;
+//		}
+//	}
+//	return best;
+//}
+
 bool isWithinOne(int x, int y) {
-	return (x==y || x==y-1 || x==y+1);
+	return (x==y || x==y+1);
 }
 
 std::vector<Row> convert(std::vector<std::vector<int> > triangle) {
