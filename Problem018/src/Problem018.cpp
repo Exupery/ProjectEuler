@@ -15,6 +15,7 @@ std::vector<int> tokenize(std::string str);
 std::vector<Row> convert(std::vector<std::vector<int> > triangle);
 bool isWithinOne(int x, int y);
 int findMaxRoute(std::vector<Row> triangle);
+int getNextRowsBest(int pos, Row nextRow);
 
 int main(int argc, char* argv[]) {
 	std::vector<std::vector<int> > triangle = createTriangle();
@@ -35,21 +36,30 @@ int findMaxRoute(std::vector<Row> triangle) {
 		std::vector<int> positions = row.getPositions();
 		int bestVal = 0;
 		int bestPos = 0;
+		int bestSum = 0;
 		std::vector<int>::iterator it;
 		for (it=positions.begin(); it!=positions.end(); it++) {
 			int pos = *it;
 			int valAtPos = row.getValueAt(pos);
-			if (isWithinOne(pos, prevPos) && valAtPos > bestVal) {
+			int sumAtPos = (rows+1<triangle.end()) ? valAtPos + getNextRowsBest(pos, *(rows+1)) : valAtPos;
+			if (isWithinOne(pos, prevPos) && sumAtPos > bestSum) {
 				bestPos = pos;
 				bestVal = valAtPos;
+				bestSum = sumAtPos;
 			}
 		}
-		std::cout << "pos:\t" << bestPos << "\tval:\t" << bestVal << "\t" << positions.size() << std::endl;
+		std::cout << "pos:\t" << bestPos << "\tval:\t" << bestVal << std::endl;
 		prevPos = bestPos;
 		highest += bestVal;
 	}
 
 	return highest;
+}
+
+int getNextRowsBest(int pos, Row nextRow) {
+	int a = nextRow.getValueAt(pos);
+	int b = nextRow.getValueAt(pos+1);
+	return (a>b) ? a : b;
 }
 
 bool isWithinOne(int x, int y) {
@@ -67,10 +77,8 @@ std::vector<Row> convert(std::vector<std::vector<int> > triangle) {
 		int pos = 0;
 		for (cols=row.begin(); cols!=row.end(); cols++) {
 			int num = *cols;
-			std::cout << num << " ";		//DELME
 			r.addNumber(num, pos++);
 		}
-		std::cout << std::endl;		//DELME
 		tri.push_back(r);
 	}
 	return tri;
