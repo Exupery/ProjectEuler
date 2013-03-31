@@ -17,7 +17,8 @@ private:
 	int rowNumber;
 	std::vector<int> positions;
 	std::map<int, int> positionValues;
-	std::map<int, int, std::greater<int> > numMap;
+//	std::map<int, int, std::greater<int> > numMap;
+	std::multimap<int, int, std::greater<int> > numMap;
 
 public:
 	Row(int rowNumber);
