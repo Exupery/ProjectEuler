@@ -9,6 +9,7 @@
 
 int findSundays(int beginMonth, int beginYear, int endMonth, int endYear);
 bool isLeapYear(int year);
+int getDaysInMonth(int month, int year);
 
 int main(int argc, char* argv[]) {
 	int numSundays = findSundays(1, 1901, 12, 2000);
@@ -27,6 +28,15 @@ bool isLeapYear(int year) {
 		return year % 400 == 0;
 	} else {
 		return year % 4 == 0;
+	}
+}
+
+int getDaysInMonth(int month, int year) {
+	int daysInMonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (month==2 && isLeapYear(year)) {
+		return 29;
+	} else {
+		return daysInMonth[month-1];
 	}
 }
 
