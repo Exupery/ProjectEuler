@@ -19,7 +19,15 @@ int main(int argc, char* argv[]) {
 
 int findSundays(int beginMonth, int beginYear, int endMonth, int endYear) {
 	int sundays = 0;
-
+	for (int year=1900; year<=endYear; year++) {
+		for (int month=1; month<=12; month++) {
+			//do stuff to find day of week for 1st of month
+			bool isSunday = true;
+			if (isSunday && month>=beginMonth && year>=beginYear && month<=endMonth) {
+				sundays++;
+			}
+		}
+	}
 	return sundays;
 }
 
