@@ -19,13 +19,18 @@ int main(int argc, char* argv[]) {
 
 int findSundays(int beginMonth, int beginYear, int endMonth, int endYear) {
 	int sundays = 0;
-	for (int year=1900; year<=endYear; year++) {
+	char daysOfWeek[7] = {'s', 'm', 't', 'w', 'h', 'f', 'a'};
+	//starting on 1/1/1900 because we are told that is a Monday
+	int daysElapsed = 1;
+	for (int year=1900; year<=1900; year++) {	//TODO: revert to endYear
 		for (int month=1; month<=12; month++) {
-			//do stuff to find day of week for 1st of month
-			bool isSunday = true;
+			std::cout << month << "\t" << year << "\t" << daysOfWeek[daysElapsed%7] << std::endl;
+			bool isSunday = daysElapsed%7==0;
 			if (isSunday && month>=beginMonth && year>=beginYear && month<=endMonth) {
 				sundays++;
 			}
+			//find day of week for 1st of next month
+			daysElapsed += getDaysInMonth(month, year);
 		}
 	}
 	return sundays;
