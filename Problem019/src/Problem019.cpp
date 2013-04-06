@@ -19,12 +19,12 @@ int main(int argc, char* argv[]) {
 
 int findSundays(int beginMonth, int beginYear, int endMonth, int endYear) {
 	int sundays = 0;
-	char daysOfWeek[7] = {'s', 'm', 't', 'w', 'h', 'f', 'a'};
+//	char daysOfWeek[7] = {'s', 'm', 't', 'w', 'h', 'f', 'a'};
 	//starting on 1/1/1900 because we are told that is a Monday
 	int daysElapsed = 1;
 	for (int year=1900; year<=endYear; year++) {
 		for (int month=1; month<=12; month++) {
-			std::cout << month << "\t" << year << "\t" << daysOfWeek[daysElapsed%7] << std::endl;
+//			std::cout << month << "\t" << year << "\t" << daysOfWeek[daysElapsed%7] << std::endl;
 			bool isSunday = daysElapsed%7==0;
 			if (isSunday &&
 					(	(year>beginYear && year<endYear) ||
