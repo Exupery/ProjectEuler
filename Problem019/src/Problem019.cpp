@@ -22,14 +22,17 @@ int findSundays(int beginMonth, int beginYear, int endMonth, int endYear) {
 	char daysOfWeek[7] = {'s', 'm', 't', 'w', 'h', 'f', 'a'};
 	//starting on 1/1/1900 because we are told that is a Monday
 	int daysElapsed = 1;
-	for (int year=1900; year<=1900; year++) {	//TODO: revert to endYear
+	for (int year=1900; year<=endYear; year++) {
 		for (int month=1; month<=12; month++) {
 			std::cout << month << "\t" << year << "\t" << daysOfWeek[daysElapsed%7] << std::endl;
 			bool isSunday = daysElapsed%7==0;
-			if (isSunday && month>=beginMonth && year>=beginYear && month<=endMonth) {
-				sundays++;
+			if (isSunday &&
+					(	(year>beginYear && year<endYear) ||
+						(year==beginYear && month>=beginMonth) ||
+						(year==endYear && month<=endMonth))
+					) {
+						sundays++;
 			}
-			//find day of week for 1st of next month
 			daysElapsed += getDaysInMonth(month, year);
 		}
 	}
