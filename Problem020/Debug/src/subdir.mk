@@ -14,10 +14,10 @@ CPP_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-src/Problem020.o: ../src/Problem020.cpp
+src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -I/home/frost/euler/bigint -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"src/Problem020.d" -o "$@" "$<"
+	g++ -I/home/frost/euler/bigint -include/home/frost/euler/bigint/BigIntegerLibrary.hh -include/home/frost/euler/bigint/BigInteger.hh -include/home/frost/euler/bigint/BigIntegerAlgorithms.hh -include/home/frost/euler/bigint/BigIntegerUtils.hh -include/home/frost/euler/bigint/BigUnsigned.hh -include/home/frost/euler/bigint/BigUnsignedInABase.hh -include/home/frost/euler/bigint/NumberlikeArray.hh -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

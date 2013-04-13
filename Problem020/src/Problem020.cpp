@@ -9,20 +9,21 @@
 #include <sstream>
 #include "BigIntegerLibrary.hh"
 
-double calcFactorial(int num, double fct);
-long sumOfDigits(double num);
+BigInteger calcFactorial(int num, BigInteger& fct);
+long sumOfDigits(BigInteger num);
 
 int main(int argc, char* argv[]) {
-	int num = 100;
+	int num = 0;
 	std::cout << "Enter a number: ";
-	//std::cin >> num;
-	int factorial = calcFactorial(num, 0);
+	std::cin >> num;
+	BigInteger factorial;
+	factorial = calcFactorial(num, factorial);
 	int sum = sumOfDigits(factorial);
-    std::cout << "The sum of the digits of " << num << "! (" << factorial << ") is " << sum << std::endl;
+    std::cout << "The sum of the digits of " << num << "! is " << sum << std::endl;
     return 0;
 }
 
-long sumOfDigits(double num) {
+long sumOfDigits(BigInteger num) {
 	long sum = 0;
 	std::ostringstream ss;
 	ss << num;
@@ -34,8 +35,7 @@ long sumOfDigits(double num) {
 	return sum;
 }
 
-double calcFactorial(int num, double fct) {
-	std::cout << fct << std::endl;	//fct is way to big for a long :-(
+BigInteger calcFactorial(int num, BigInteger& fct) {
 	if (num == 0) {
 		return fct;
 	} else {
