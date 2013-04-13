@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <sstream>
 
-long calcFactorial(int num, long fct);
-long sumOfDigits(int num);
+double calcFactorial(int num, double fct);
+long sumOfDigits(double num);
 
 int main(int argc, char* argv[]) {
 	int num = 0;
@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-long sumOfDigits(int num) {
+long sumOfDigits(double num) {
 	long sum = 0;
 	std::ostringstream ss;
 	ss << num;
@@ -33,7 +33,7 @@ long sumOfDigits(int num) {
 	return sum;
 }
 
-long calcFactorial(int num, long fct) {
+double calcFactorial(int num, double fct) {
 	std::cout << fct << std::endl;	//fct is way to big for a long :-(
 	if (num == 0) {
 		return fct;
