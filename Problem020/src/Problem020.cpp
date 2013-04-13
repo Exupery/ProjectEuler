@@ -7,14 +7,15 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include "BigIntegerLibrary.hh"
 
 double calcFactorial(int num, double fct);
 long sumOfDigits(double num);
 
 int main(int argc, char* argv[]) {
-	int num = 0;
+	int num = 100;
 	std::cout << "Enter a number: ";
-	std::cin >> num;
+	//std::cin >> num;
 	int factorial = calcFactorial(num, 0);
 	int sum = sumOfDigits(factorial);
     std::cout << "The sum of the digits of " << num << "! (" << factorial << ") is " << sum << std::endl;
