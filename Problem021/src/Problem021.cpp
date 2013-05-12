@@ -5,24 +5,41 @@
 //============================================================================
 
 #include <iostream>
+#include <map>
+#include <set>
 
-int calcSum(int target);
+long calcSum(int target);
 int sumOfDivisors(int num);
 
 int main(int argc, char* argv[]) {
-	int target = 100;
+	int target = 10000;
 //	std::cout << "Target number: ";
 //	std::cin >> target;
-	int sum = calcSum(target);
+	long sum = calcSum(target);
     std::cout << "The sum of all the amicable numbers under " << target << " is " << sum << std::endl;
     return 0;
 }
 
-int calcSum(int target) {
-	int sum = 0;
+long calcSum(int target) {
+	long sum = 0;
+	std::map<int, int> allDivSums;
+	std::set<int> paired;
 	for (int i=0; i<target; i++) {
 		int divSum = sumOfDivisors(i);
-		std::cout << "sum of divisors of " << i << " is " << divSum << std::endl;
+		allDivSums.insert(std::make_pair(i, divSum));
+	}
+
+	std::map<int, int>::iterator iter;
+	for (iter=allDivSums.begin(); iter!=allDivSums.end(); iter++) {
+		if (iter->second < target) {
+			paired.insert(iter->first);
+			paired.insert(iter->second);
+		}
+	}
+
+	std::set<int>::iterator sumIter;
+	for (sumIter=paired.begin(); sumIter!=paired.end(); sumIter++) {
+		sum += *sumIter;
 	}
 	return sum;
 }
