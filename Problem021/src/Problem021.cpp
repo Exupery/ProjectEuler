@@ -5,14 +5,12 @@
 //============================================================================
 
 #include <iostream>
-#include <map>
-#include <set>
 
 long calcSum(int target);
 int sumOfDivisors(int num);
 
 int main(int argc, char* argv[]) {
-	int target = 10000;
+	int target = 100;
 //	std::cout << "Target number: ";
 //	std::cin >> target;
 	long sum = calcSum(target);
@@ -22,25 +20,14 @@ int main(int argc, char* argv[]) {
 
 long calcSum(int target) {
 	long sum = 0;
-	std::map<int, int> allDivSums;
-	std::set<int> paired;
+
 	for (int i=0; i<target; i++) {
 		int divSum = sumOfDivisors(i);
-		allDivSums.insert(std::make_pair(i, divSum));
-	}
-
-	std::map<int, int>::iterator iter;
-	for (iter=allDivSums.begin(); iter!=allDivSums.end(); iter++) {
-		if (iter->second < target) {
-			paired.insert(iter->first);
-			paired.insert(iter->second);
+		if (i == sumOfDivisors(divSum) && i != divSum) {
+			sum += (divSum + i);
 		}
 	}
 
-	std::set<int>::iterator sumIter;
-	for (sumIter=paired.begin(); sumIter!=paired.end(); sumIter++) {
-		sum += *sumIter;
-	}
 	return sum;
 }
 
