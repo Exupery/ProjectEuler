@@ -5,14 +5,15 @@
 //============================================================================
 
 #include <iostream>
+#include <set>
 
 long calcSum(int target);
 int sumOfDivisors(int num);
 
 int main(int argc, char* argv[]) {
-	int target = 100;
-//	std::cout << "Target number: ";
-//	std::cin >> target;
+	int target = 10000;
+	std::cout << "Target number: ";
+	std::cin >> target;
 	long sum = calcSum(target);
     std::cout << "The sum of all the amicable numbers under " << target << " is " << sum << std::endl;
     return 0;
@@ -20,14 +21,20 @@ int main(int argc, char* argv[]) {
 
 long calcSum(int target) {
 	long sum = 0;
+	std::set<int> amicable;
 
 	for (int i=0; i<target; i++) {
 		int divSum = sumOfDivisors(i);
 		if (i == sumOfDivisors(divSum) && i != divSum) {
-			sum += (divSum + i);
+			amicable.insert(i);
+			amicable.insert(divSum);
 		}
 	}
 
+	std::set<int>::iterator iter;
+	for (iter=amicable.begin(); iter!=amicable.end(); iter++) {
+		sum += *iter;
+	}
 	return sum;
 }
 
