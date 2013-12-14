@@ -23,8 +23,14 @@ int main(int argc, char* argv[]) {
 long totalScore(std::vector<std::string> names) {
 	std::sort(names.begin(), names.end());
 	long total = 0;
+	int pos = 1;
 	for (auto name : names) {
-		std::cout << name << std::endl;
+		int val = 0;
+		for (auto n : name) {
+			val += (int)n - 64;
+		}
+		total += (val * pos);
+		pos++;
 	}
 	return total;
 }
@@ -46,6 +52,3 @@ std::vector<std::string> readNames(std::string filename) {
 	}
 	return names;
 }
-
-
-
