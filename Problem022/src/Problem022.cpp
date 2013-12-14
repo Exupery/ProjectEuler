@@ -7,13 +7,26 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 std::vector<std::string> readNames(std::string filename);
+long totalScore(std::vector<std::string> names);
 
 int main(int argc, char* argv[]) {
 	std::vector<std::string> names = readNames("names.txt");
     std::cout << "Found " << names.size() << " names" << std::endl;
+    long total = totalScore(names);
+    std::cout << "Total score: " << total << std::endl;
     return 0;
+}
+
+long totalScore(std::vector<std::string> names) {
+	std::sort(names.begin(), names.end());
+	long total = 0;
+	for (auto name : names) {
+		std::cout << name << std::endl;
+	}
+	return total;
 }
 
 std::vector<std::string> readNames(std::string filename) {
