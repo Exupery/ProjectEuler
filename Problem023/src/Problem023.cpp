@@ -6,15 +6,43 @@
 //============================================================================
 
 #include <iostream>
+#include <algorithm>
+#include <set>
 #include <vector>
 
 bool isAbundant(int num);
 std::vector<int> findAbundants(int max);
+std::set<int> hasSumOfAbundant(int max);
 
 int main(int argc, char* argv[]) {
-	std::vector<int> abundants = findAbundants(28123);
-    std::cout << abundants.size() << std::endl;	//DELME
+	int max = 28123;
+	std::set<int> hasSums = hasSumOfAbundant(max);
+	int sum = 0;
+	for (int i = 0; i < max; i++) {
+		if (hasSums.count(i) == 0) {
+			sum += i;
+		}
+	}
+    std::cout << sum << std::endl;
     return 0;
+}
+
+std::set<int> hasSumOfAbundant(int max) {
+	std::set<int> hasSums;
+	std::vector<int> abundants = findAbundants(max);
+	std::sort(abundants.begin(), abundants.end());
+	for (auto i : abundants) {
+		for (auto j : abundants) {
+			int sum = i + j;
+			if (sum < max) {
+				hasSums.insert(sum);
+			} else {
+				break;
+			}
+
+		}
+	}
+	return hasSums;
 }
 
 std::vector<int> findAbundants(int max) {
