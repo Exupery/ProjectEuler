@@ -12,7 +12,7 @@
 std::set<std::vector<int>> fill(int pos, std::vector<int> digits);
 
 int main(int argc, char* argv[]) {
-	std::vector<int> digits = {0, 1, 2};
+	std::vector<int> digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	std::set<std::vector<int>> permutations;
 	for (int d : digits) {
 		std::set<std::vector<int>> filled = fill(d, digits);
@@ -43,13 +43,15 @@ std::set<std::vector<int>> fill(int pos, std::vector<int> digits) {
 		valuesPositions.insert(std::pair<int, int>(i, pos));
 		valuesPositions.insert(std::pair<int, int>(valAtPos, prevPos));
 		std::vector<int> filledPerm;
-		std::cout << i << " / " << pos << " \t";	//DELME
 		for (auto p : positionsValues) {
-			std::cout << p.second;	//DELME
 			filledPerm.push_back(p.second);
 		}
-		std::cout << std::endl;		//DELME
 		filled.insert(filledPerm);
+		std::vector<int> reversed;
+		for (int j = filledPerm.size()-1; j >= 0; j--) {
+			reversed.push_back(filledPerm.at(j));
+		}
+		filled.insert(reversed);
 	}
 	return filled;
 }
