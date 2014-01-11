@@ -26,14 +26,23 @@ std::set<std::vector<int>> fill(std::vector<int> digits, std::set<std::vector<in
 		for (auto digit : digits) {
 			std::vector<int> p(perm);
 			auto pos = std::find(std::begin(p), std::end(p), digit);
+			p.erase(pos);
 			if (pos == p.begin()) {
-				//swap first and last elements
-				std::cout << p.size() << "\t" << digit << std::endl;	//DELME
+				int last = p.back();
+				p.pop_back();
+				p.push_back(digit);
+				p.insert(pos, last);
 			} else {
-				//swap pos with pos-1
+				p.insert(pos-1, digit);
 			}
 			filled.insert(p);
-			//reverse
+			std::vector<int> reversed;
+			for (int i = p.size()-1; i >= 0; i--) {
+					reversed.push_back(p.at(i));
+			}
+			if (p.size() == digits.size()) {
+				filled.insert(reversed);
+			}
 		}
 	}
 	return (filled.size() == perms.size()) ? filled : fill(digits, filled);
