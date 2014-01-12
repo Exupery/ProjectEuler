@@ -6,16 +6,32 @@
 
 #include <iostream>
 #include <set>
+#include <list>
 #include <vector>
 #include <algorithm>
 
 std::set<std::vector<int>> fill(std::vector<int> digits, std::set<std::vector<int>> perms);
 
 int main(int argc, char* argv[]) {
-//	std::vector<int> digits {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-	std::vector<int> digits {0, 1, 2};
+	std::vector<int> digits {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	std::set<std::vector<int>> initial {digits};
-	std::set<std::vector<int>> permutations = fill(digits, initial);
+	std::set<std::vector<int>> unsorted = fill(digits, initial);
+	std::list<std::vector<int>> permutations;
+	permutations.insert(permutations.begin(), unsorted.begin(), unsorted.end());
+	permutations.sort();
+	int ctr = 1;
+	std::vector<int> targetPerm;
+	for (auto perm : permutations) {
+		if (ctr == 1000000) {
+			targetPerm = perm;
+			break;
+		}
+		ctr++;
+	}
+	for (int d : targetPerm) {
+		std::cout << d;
+	}
+	std::cout << std::endl;
     std::cout << "Found " << permutations.size() << " permutations" << std::endl;
     return 0;
 }
